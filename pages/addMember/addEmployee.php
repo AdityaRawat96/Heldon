@@ -434,14 +434,14 @@
                                 </div>
 
                                 <div class="input-group">
-                                  <span class="input-group-addon">
+                                  <span class="input-group-addon">&nbsp;
                                     <i class="fas fa-calendar-alt fa-lg"></i>
                                   </span>
-                                  <div class="form-group label-floating">
-                                    <label class="control-label">Receipt Date
+                                  <div class="form-group label-floating" id='divdib1' onclick="$('#dateError1').css('color','black');">
+                                    <label class="control-label" id="dateError1">Receipt Date
                                       <small>(required)</small>
                                     </label>
-                                    <input type="text" id="rDate" class="datepicker form-control" onkeydown="return false;" name="rDate" onblur="$('#divdib').removeClass('is-empty');" disabled required/>
+                                    <input type="text" id="rDate" required class="datepicker form-control" onkeydown="return false;" name="rDate" onblur="$('#divdib1').removeClass('is-empty');" disabled/>
                                   </div>
                                 </div>
 
@@ -795,6 +795,14 @@
                 }
               });
 
+              $('#pin').keypress(function(key) {
+                if(key.charCode < 48 || key.charCode > 57) return false;
+                else if($('#pin').val().length >= 6)
+                {
+                  return false;
+                }
+              });
+
               $('#contact1').keypress(function(key) {
                 if(key.charCode < 48 || key.charCode > 57) return false;
                 else if($('#contact1').val().length >= 10)
@@ -807,6 +815,14 @@
                 if(key.charCode < 48 || key.charCode > 57) return false;
                 else if($('#contact2').val().length >= 10)
                 {
+                  return false;
+                }
+              });
+              $('#amountwords').keypress(function(key) {
+                if(key.charCode < 48 || key.charCode > 57){
+                  return true;
+                }
+                else{
                   return false;
                 }
               });
@@ -906,11 +922,13 @@
                 }
                 else if (this.value == 'dd')
                 {
+                  $('#rDate').val("");
                   $('#ddNo').prop('disabled',false);
                   $('#rDate').prop('disabled',true);
                 }
                 else
                 {
+                  $('#rDate').val("");
                   $('#rDate').prop('disabled',true);
                   $('#ddNo').prop('disabled',true);
                 }

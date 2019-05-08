@@ -302,7 +302,11 @@ var demo = {
         },
         email: {
           required: true,
-          minlength: 3,
+          minlength: 3
+        },
+        pin: {
+          required: true,
+          minlength: 6
         },
         userImage:{
           required: true
