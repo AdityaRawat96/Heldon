@@ -1,3 +1,13 @@
+<html>
+
+    <head>
+         <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-3.4.0.js" integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="../../assets/css/style.css">
+    </head>
 <nav class="navbar navbar-default navbar-absolute" data-topbar-color="yellow">
     <div class="container-fluid">
         <div class="navbar-minimize">
@@ -30,10 +40,10 @@
                         <p class="hidden-lg hidden-md">Profile</p>
                     </a>
                 </li>
-                <li>
+               <li onclick="logout();">
                     <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">settings</i>
-                        <p class="hidden-lg hidden-md">Settings</p>
+                      <i class="fas fa-power-off fa-2x"></i>
+                      <p class="hidden-lg hidden-md">Log Out</p>
                     </a>
                 </li>
                 <li class="separator hidden-lg hidden-md"></li>
@@ -41,3 +51,28 @@
         </div>
     </div>
 </nav>
+</body>
+<script>
+    function logout(){
+
+
+  swal({
+    title: 'Are you sure?',
+    text: 'You want to logout!',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No',
+    confirmButtonClass: "btn btn-success",
+    cancelButtonClass: "btn btn-danger",
+    buttonsStyling: false
+  }).then(function() {
+        window.open("../php/cookiesunset.php", "_self");
+  }, function(dismiss) {
+    if (dismiss === 'cancel') {
+      
+    }
+  });
+}
+</script>
+</html>

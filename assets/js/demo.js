@@ -303,11 +303,27 @@ var demo = {
         email: {
           required: true,
           minlength: 3,
+        },
+        userImage:{
+          required: true
+        },
+        contact1: {
+          required: true,
+          minlength: 10
+        },
+        contact2: {
+          required: true,
+          minlength: 10
         }
       },
 
       errorPlacement: function(error, element) {
-        $(element).parent('div').addClass('has-error');
+        if($(element).attr('name')=="userImage"){
+          $('#picError').css('display','inline-block');
+        }
+        else{
+          $(element).parent('div').addClass('has-error');
+        }
       }
     });
 
@@ -335,7 +351,7 @@ var demo = {
         var $display_width = $(document).width();
 
         if($display_width < 600 && $total > 3){
-          $width = 33;
+          $width = 100/$total;
         }
 
         navigation.find('li').css('width',$width + '%');
@@ -364,6 +380,7 @@ var demo = {
 
         // If it's the last tab then hide the last button and show the finish instead
         if($current >= $total) {
+          confirmResult();
           $($wizard).find('.btn-next').hide();
           $($wizard).find('.btn-finish').show();
         } else {

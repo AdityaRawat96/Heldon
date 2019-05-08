@@ -24,8 +24,7 @@
   <link href="../../assets/vendors/dropzone/dropzone.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-  <script src="../../assets/dist/croppie.js" ></script>
-  <link href="../../assets/dist/croppie.css" media="screen" rel="stylesheet" type="text/css">
+
 
   <script type="text/javascript">
 
@@ -35,9 +34,11 @@
   function setImage(){
     $('#image-3').croppie('result', {
       type: 'canvas',
-      size: 'viewport'
+      size: 'viewport',
+      circle: false
     }).then(function (resp) {
       $('#wizardPicturePreview').attr('src', resp).fadeIn('slow');
+      $('#imagebase64').val(resp);
       $("#closeModal").trigger('click');
     });
 
@@ -93,40 +94,41 @@
                     <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
                     <div class="wizard-header">
                       <h3 class="wizard-title">
-                        Register an Employee
+                        Register new applicant
                       </h3>
-                      <h5>Add new employee details in the database.</h5>
+                      <h5>Provide applicant details below.</h5>
                     </div>
                     <div class="wizard-navigation">
                       <ul class="trackPage">
                         <li>
-                          <a href="#personalInfo" data-toggle="tab" onclick="changePageNo(1);">Personal Info</a>
+                          <a href="#personalInfo" data-toggle="tab">PERSONAL</a>
                         </li>
                         <li>
-                          <a href="#addressDetails" data-toggle="tab" onclick="checkPicture(); changePageNo(2);">Address Details</a>
+                          <a href="#addressDetails" data-toggle="tab">ADDRESS</a>
                         </li>
                         <li>
-                          <a href="#paymentDetails" data-toggle="tab" onclick="changePageNo(3);">Payment Details</a>
+                          <a href="#paymentDetails" data-toggle="tab">PAYMENT</a>
                         </li>
                         <li>
-                          <a href="#productDetails" data-toggle="tab" onclick="changePageNo(4);">Product Details</a>
+                          <a href="#productDetails" data-toggle="tab">PRODUCT</a>
                         </li>
                         <li>
-                          <a href="#bankDetails" data-toggle="tab" onclick="changePageNo(5);">Bank Details</a>
+                          <a href="#bankDetails" data-toggle="tab">BANK</a>
                         </li><li>
-                          <a href="#confirm" data-toggle="tab" onclick="changePageNo(6); confirmResult();">Confirm</a>
+                          <a href="#confirm" data-toggle="tab">CONFIRM</a>
                         </li>
                       </ul>
                     </div>
                     <div class="tab-content">
                       <div class="tab-pane" id="personalInfo">
                         <div class="row">
-                          <h4 class="info-text"> Enter Employee Basic information.</h4>
+                          <h4 class="info-text"> Enter applicant's Basic information.</h4>
                           <div class="col-sm-4 col-sm-offset-1">
                             <div class="picture-container">
                               <div class="picture">
                                 <img src="../../assets/images/faces/avatar.png" class="picture-src" id="wizardPicturePreview" title="" />
                                 <input name="userImage" type="file" id="wizard-picture" required onclick="$('#picError').fadeOut();">
+                                <input type="hidden" id="imagebase64" name="imagebase64">
                               </div>
                               <h6>Choose Picture</h6>
                               <small id="picError" style="display:none; color:red;">Please select a profile picture!</small>
@@ -161,7 +163,7 @@
                               </span>
                               <div class="row">
                                 <div class="form-group label-floating" for="age">
-                                  <div class="col-sm-4"><label>Sex
+                                  <div class="col-sm-4"><label>Gender
                                     <small>(required)</small>
                                   </label></div>
                                   <div class="col-sm-8">
@@ -175,8 +177,8 @@
                                 <span class="input-group-addon">&nbsp;
                                   <i class="fas fa-calendar-alt fa-lg"></i>
                                 </span>
-                                <div class="form-group label-floating" id='divdib'>
-                                  <label class="control-label">Date of Birth
+                                <div class="form-group label-floating" id='divdib' onclick="$('#dateError').css('color','black');">
+                                  <label class="control-label" id="dateError">Date of Birth
                                     <small>(required)</small>
                                   </label>
                                   <input type="text" id="dob" required class="datepicker form-control" onkeydown="return false;" name="dob" onblur="$('#divdib').removeClass('is-empty');" />
@@ -194,7 +196,7 @@
                                   <label class="control-label">Father's Name
                                     <small>(required)</small>
                                   </label>
-                                  <input name="fname" type="text" class="form-control" id="fname">
+                                  <input name="fname" type="text" class="form-control" id="fname" required>
                                 </div>
                               </div><br>
                               <center><span><strong>OR</strong></span></center>
@@ -207,7 +209,7 @@
                                   <label class="control-label">Husband's Name
                                     <small>(required)</small>
                                   </label>
-                                  <input name="hname" type="text" class="form-control" id="hname" disabled>
+                                  <input name="hname" type="text" class="form-control" id="hname" disabled required>
                                 </div>
                               </div>
                               <div class="input-group">
@@ -236,7 +238,7 @@
                           </div>
                         </div>
                         <div class="tab-pane" id="addressDetails">
-                          <h4 class="info-text"> Add Address Details. </h4>
+                          <h4 class="info-text"> Enter address details. </h4>
                           <div class="row">
                             <div class="col-lg-10">
                               <div class="col-lg-10 col-lg-offset-1">
@@ -256,7 +258,7 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-map-marked-alt fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Permanent Address
@@ -270,7 +272,7 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-map-marker fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Post Office
@@ -279,7 +281,7 @@
                                     <input name="PO" type="text" class="form-control" id="PO" required>
                                   </div>
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-map-marker fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Police Station
@@ -293,7 +295,7 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-map-marker-alt fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">District
@@ -302,7 +304,7 @@
                                     <input name="district" type="text" class="form-control" id="district" required>
                                   </div>
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-map-marker-alt fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">State
@@ -317,7 +319,7 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-map-pin fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">PIN code/Ward No.
@@ -332,13 +334,13 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-at fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">E-mail
                                       <small>(required)</small>
                                     </label>
-                                    <input name="email" type="text" class="form-control" id="email" required>
+                                    <input name="email" type="email" class="form-control" id="email" required>
                                   </div>
                                 </div>
                               </div>
@@ -346,7 +348,7 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-phone-volume fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Contact 1
@@ -355,7 +357,7 @@
                                     <input name="contact1" type="text" class="form-control" id="contact1" required>
                                   </div>
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-phone-volume fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Contact 2
@@ -370,7 +372,7 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-user fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Senior Name
@@ -386,13 +388,13 @@
                         <div class="tab-pane" id="paymentDetails">
                           <div class="row">
                             <div class="col-sm-12">
-                              <h4 class="info-text">Payment Details. </h4>
+                              <h4 class="info-text">Enter payment details. </h4>
                             </div>
 
                             <div class="col-lg-10 col-lg-offset-1">
                               <div class="input-group">
                                 <span class="input-group-addon">
-                                  <i class="material-icons">email</i>
+                                  <i class="fas fa-rupee-sign fa-lg"></i>
                                 </span>
                                 <div class="form-group label-floating">
                                   <label class="control-label">Amount
@@ -404,7 +406,7 @@
 
                               <div class="input-group">
                                 <span class="input-group-addon">
-                                  <i class="material-icons">email</i>
+                                  <i class="fas fa-rupee-sign fa-lg"></i>
                                 </span>
                                 <div class="form-group label-floating">
                                   <label class="control-label">Amount(in words)
@@ -433,37 +435,37 @@
 
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-calendar-alt fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Receipt Date
                                       <small>(required)</small>
                                     </label>
-                                    <input type="text" id="rDate" class="datepicker form-control" onkeydown="return false;" name="rDate" onblur="$('#divdib').removeClass('is-empty');" disabled/>
+                                    <input type="text" id="rDate" class="datepicker form-control" onkeydown="return false;" name="rDate" onblur="$('#divdib').removeClass('is-empty');" disabled required/>
                                   </div>
                                 </div>
 
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-list-ol fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Demand Draft No.
                                       <small>(required)</small>
                                     </label>
-                                    <input name="ddNo" type="text" class="form-control" id="ddNo" disabled/>
+                                    <input name="ddNo" type="text" class="form-control" id="ddNo" disabled required/>
                                   </div>
                                 </div>
 
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-id-badge fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">PAN Number
                                       <small>(required)</small>
                                     </label>
-                                    <input name="pan" type="text" class="form-control" id="pan">
+                                    <input name="pan" type="text" class="form-control" id="pan" required>
                                   </div>
                                 </div>
                               </div>
@@ -472,18 +474,18 @@
                           <div class="tab-pane" id="productDetails">
                             <div class="row">
                               <div class="col-sm-12">
-                                <h4 class="info-text"> Product Details! </h4>
+                                <h4 class="info-text"> Enter product details. </h4>
                               </div>
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-burn fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Product
                                       <small>(required)</small>
                                     </label>
-                                    <input name="product" type="text" class="form-control" id="product">
+                                    <input name="product" type="text" class="form-control" id="product" required>
                                   </div>
                                 </div>
                               </div>
@@ -494,18 +496,18 @@
                           <div class="tab-pane" id="bankDetails">
                             <div class="row">
                               <div class="col-sm-12">
-                                <h4 class="info-text"> Bank Details! </h4>
+                                <h4 class="info-text"> Enter Bank details. </h4>
                               </div>
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-university fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Bank Name
                                       <small>(required)</small>
                                     </label>
-                                    <input name="bankName" type="text" class="form-control" id="bankName">
+                                    <input name="bankName" type="text" class="form-control" id="bankName" required>
                                   </div>
                                 </div>
                               </div>
@@ -513,13 +515,13 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-money-check fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Account No.
                                       <small>(required)</small>
                                     </label>
-                                    <input name="accountNo" type="text" class="form-control" id="accountNo">
+                                    <input name="accountNo" type="text" class="form-control" id="accountNo" required>
                                   </div>
                                 </div>
                               </div>
@@ -527,13 +529,13 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-money-check fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">IFSC
                                       <small>(required)</small>
                                     </label>
-                                    <input name="ifsc" type="text" class="form-control" id="ifsc">
+                                    <input name="ifsc" type="text" class="form-control" id="ifsc" required>
                                   </div>
                                 </div>
                               </div>
@@ -541,13 +543,13 @@
                               <div class="col-lg-10 col-lg-offset-1">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
+                                    <i class="fas fa-money-check fa-lg"></i>
                                   </span>
                                   <div class="form-group label-floating">
                                     <label class="control-label">Maintained At
                                       <small>(required)</small>
                                     </label>
-                                    <input name="maintainedAt" type="text" class="form-control" id="maintainedAt">
+                                    <input name="maintainedAt" type="text" class="form-control" id="maintainedAt" required>
                                   </div>
                                 </div>
                               </div>
@@ -575,7 +577,7 @@
                                       <td style="width:50%"><input id="cage" type="text" name="cage" class="form-control" disabled  style="margin-bottom:20px;"></td>
                                     </tr>
                                     <tr>
-                                      <td style="width:20%"><label>Sex:</label></td>
+                                      <td style="width:20%"><label>Gender:</label></td>
                                       <td style="width:50%"><input id="csex" type="text" name="csex" class="form-control" disabled  style="margin-bottom:20px;"></td>
                                     </tr>
                                     <tr>
@@ -766,43 +768,16 @@
 
             <script src="../../assets/vendors/dropzone/dropzone.min.js"></script>
 
+            <script src="../../assets/dist/croppie.js" ></script>
+            <link href="../../assets/dist/croppie.css" media="screen" rel="stylesheet" type="text/css">
+
 
             <script>
-            var pageNo = 1;
-            var checkCounter = 0;
 
             $(document).ready(function() {
 
-
-
-
               demo.initFormExtendedDatetimepickers();
               demo.initMaterialWizard();
-
-              $("#nextButton").on('click', function(e){
-                console.log($('.trackPage > .active >a').text());
-                if(pageNo == 1){
-                  if(checkPicture() && ($('.trackPage > .active >a').text()=="Address Details")){
-                    pageNo++;
-                  }
-                }
-                else if(pageNo == 2){
-                  pageNo++;
-                }
-                else if(pageNo == 3){
-                  pageNo++;
-                }
-                else if(pageNo == 4){
-                  pageNo++;
-                }
-                else if(pageNo == 5){
-                  confirmResult();
-                  pageNo++;
-                }
-              });
-              $("#prevButton").on('click', function(e){
-                pageNo--;
-              });
 
               $('#ephone').keypress(function(key) {
                 if(key.charCode < 48 || key.charCode > 57) return false;
@@ -811,27 +786,43 @@
                   return false;
                 }
               });
+
+              $('#age').keypress(function(key) {
+                if(key.charCode < 48 || key.charCode > 57) return false;
+                else if($('#age').val().length >= 3)
+                {
+                  return false;
+                }
+              });
+
+              $('#contact1').keypress(function(key) {
+                if(key.charCode < 48 || key.charCode > 57) return false;
+                else if($('#contact1').val().length >= 10)
+                {
+                  return false;
+                }
+              });
+
+              $('#contact2').keypress(function(key) {
+                if(key.charCode < 48 || key.charCode > 57) return false;
+                else if($('#contact2').val().length >= 10)
+                {
+                  return false;
+                }
+              });
+
+              $('#amount').keypress(function(key) {
+                if(key.charCode < 48 || key.charCode > 57) return false;
+                else if($('#amount').val().length >= 10)
+                {
+                  return false;
+                }
+              });
+
+              $('#accountNo').keypress(function(key) {
+                if(key.charCode < 48 || key.charCode > 57) return false;
+              });
             });
-
-            function changePageNo(n){
-              pageNo = n;
-            }
-
-            function checkPicture(){
-              if($("#wizard-picture").val()==''){
-                $("#picError").fadeIn();
-                return false;
-              }
-              return true;
-            }
-
-            function checkSkills(){
-              if(checkCounter == 0){
-                $('#skillError').fadeIn();
-                return false;
-              }
-              return true;
-            }
 
             function copyAddress(checkbox){
               if(checkbox.checked == true){

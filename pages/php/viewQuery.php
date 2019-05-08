@@ -1,9 +1,3 @@
-<?php
- session_start(); 
-error_reporting(0);
-if(isset($_SESSION['id']))
-{
- ?>
 <!doctype html>
 <html lang="en">
 
@@ -36,7 +30,7 @@ if(isset($_SESSION['id']))
 
 </head>
 
-<body onload="searchParent(<?php echo $_SESSION['id'] ?>);">
+<body>
   <div class="wrapper">
 
     <!--  Sidebar included     -->
@@ -49,31 +43,53 @@ if(isset($_SESSION['id']))
 
       <div class="content">
         <div class="container-fluid">
+            
+            <div  id="dataContainer">
 
-          <!--  Page content goes here!    -->
-          <section class="management-hierarchy" style="position:relative; min-height:750px;">
+            </div>
 
-              <h1> Management Hierarchy</h1>
-              <div class="hv-container">
-                  <div class="hv-wrapper">
+        <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+                <?php
+                    include('connection.php');
+                    $result=mysqli_query($con,'select * from Query')or die(mysqli_error($con));
+                    if(mysqli_num_rows($result)>0)
+                    {
+                        while($row=mysqli_fetch_array($result))
+                        {
+                            $id=$row['id'];
+                            $name=$row['name'];
+                            $email=$row['email'];
+                            $contact=$row['contact'];
+                            $subject=$row['subject'];
+                            $message=$row['message'];
+                            $status=$row['status'];
+                            ?>
+                                <tr><td><?php echo $id; ?></td><td><?php echo $name; ?></td><td><?php echo $email; ?></td><td><?php echo $contact; ?></td><td><?php echo $subject; ?></td><td><?php echo $message; ?></td><td><?php echo $status; ?></td><td><i class="material-icons" title="Add Response" style="cursor:pointer" onclick="addResponse('<?php echo $id; ?>')">add</i></td></tr>
+                            <?php
 
-                      <!-- Key component -->
-                      <div class="hv-item">
-
-                          <div class="hv-item-parent" id="mainParent">
-
-                          </div>
-
-                          <div class="hv-item-children" id="mainChildren">
-
-
-                          </div>
-
-                      </div>
-
-                  </div>
-              </div>
-          </section>
+                        }
+                    }
+                    else
+                    {
+                        
+                    }
+                ?>
+            </tbody>
+        </table>
 
 
 
@@ -130,103 +146,48 @@ if(isset($_SESSION['id']))
 <script src="../../assets/js/demo.js"></script>
 
 <script src="../../assets/vendors/dropzone/dropzone.min.js"></script>
-
-<script type="text/javascript">
-var currentId;
-var myObj;
-function searchParent(id){
-  $.ajax({
-    type: 'POST',
-    url: '../php/searchParent.php',
-    data: { id : id },
-
-    success: function(response) {
-      //alert(response);
-      $("#mainParent").html(response);
-      searchChildren(id);
-    }
-  });
-}
-function searchChildren(id){
-  $.ajax({
-    type: 'POST',
-    url: '../php/searchChildren.php',
-    data: { id : id },
-
-    success: function(response) {
-      myObj = JSON.parse(response);
-      $("#mainChildren").html(myObj.data);
-    }
-  });
-}
-function showChildren(id){
-  currentId = id;
-  var array = myObj.children;
-  var arrayLength=array.length;
-  for(var i=0;i<arrayLength;i++){
-    if(id!=array[i]){
-      hideChildren(array[i]);
-    }
+<script>
+    function addResponse(id)
+  {
+    var rowId=id;
+    $.ajax({
+      type: 'post',
+      url: '../php/getQuery.php',
+      data: {
+        rowId: rowId
+      },
+      success: function( data ) {
+        
+        $("#dataContainer").html(data);
+        $("#myButton").trigger( "click" );
+      }
+    });
   }
-  showAllChildren(id);
-}
-
-function showAllChildren(id){
-  var name = "child"+id;
-  var parent = $("#"+name+"").html();
-  var value = $("#"+name+"").val();
-  $.ajax({
-    type: 'POST',
-    url: '../php/searchChildren.php',
-    data: { id : id },
-
-    success: function(response) {
-      myObj = JSON.parse(response);
-      if(value == 1){
-        var name = "child"+id;
-        var name1 = "parent"+id;
-        var parent = $("#"+name1+"").html();
-        $("#"+name+"").html('<div class="hv-item"><div class="hv-item-parent" id="parent'+id+'">'+parent+'</div><div class="hv-item-children">'+myObj.data+'</div></div>');
-      }
-      else{
-        var name = "child"+id;
-        var parent = $("#"+name+"").html();
-        $("#"+name+"").html('<div class="hv-item"><div class="hv-item-parent" id="parent'+id+'">'+parent+'</div><div class="hv-item-children">'+myObj.data+'</div></div>');
-        $("#"+name+"").val("1");
-      }
+    
+    
+function responseSubmitted(){
+    if($('#responseArea').val()=="")
+    {
+      alert('Please enter any response');
+      return false;
     }
-  });
-}
+    $.ajax({
+      type: 'POST',
+      url: '../php/sendMailQuery.php',
+      data: {responseValue:$('#responseArea').val(),email:$('#email').val(),name:$('#name').val()},
 
-function hideChildren(child){
-  var name = "child"+child;
-  var current = "child"+currentId;
-  $("#"+name+"").css("display", "none");
-  $("#"+current+"").addClass("mainHide");
-}
+      beforeSend: function() {
 
+      },
+      success: function(response) {
+        if(response.match(/error/)){
+         alert('Error in sending mail.Please try again later');
+        }
+        else{
+          alert("Mail send successfully");
+        }
+      }
+    });
+  }
 </script>
-
-<style media="screen">
-.mainHide::after{
-  visibility: hidden;
-}
-
-.status0{
-  color: red;
-}
-
-.status1{
-  color: green;
-}
-</style>
-
 </html>
-<?php
-}
-else
-{
-    ?>
-    <script>window.open('../php/cookiesunset.php','_self');</script>
-    <?php
-}

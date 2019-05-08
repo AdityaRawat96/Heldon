@@ -1,6 +1,10 @@
 <?php
+session_unset();
+session_destroy();
+session_start();
 $a=$_POST['Username'];
 $b=$_POST['Password'];
+$c=$_POST['Remember'];
 session_start();
 $_SESSION["id"] = "";
 $counter=0;
@@ -16,6 +20,12 @@ if(mysqli_num_rows($result)>0)
     if(strcmp($b,$password)==0)
     {
         $id=$row['Id'];
+        if($c=='1')
+        {
+            $exp=time()+31536000;
+            setcookie("heldonid",$id,$exp,'/'); 
+        }
+        
         $_SESSION["id"]= $id;
         echo 'confirm';
     }
