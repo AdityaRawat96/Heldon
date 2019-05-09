@@ -23,11 +23,14 @@ if(mysqli_num_rows($result)>0)
         if($c=='1')
         {
             $exp=time()+31536000;
-            setcookie("heldonid",$id,$exp,'/'); 
+            setcookie("heldonid",$id,$exp,'/');
         }
-        
+
         $_SESSION["id"]= $id;
         echo 'confirm';
+    }
+    else{
+      echo 'failed'
     }
   }
 }

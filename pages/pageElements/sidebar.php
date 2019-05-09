@@ -1,7 +1,7 @@
 <?php
 if(session_id()=='')
 {
-  session_start();  
+  session_start();
 }
 $user=$_SESSION['id'];
 include('../php/connection.php');
@@ -19,7 +19,7 @@ if($row['hierarchy']=='1')
     </div>
     <div class="logo logo-mini">
         <a href="#" class="simple-text">
-            <img src="../../assets/images/logo.png" alt="">
+            <img src="../../assets/images/logo_alt.png" alt="">
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -99,4 +99,3 @@ else
 <?php
 }
     ?>
-

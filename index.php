@@ -71,6 +71,9 @@ if(!isset($_COOKIE["heldonid"]))
           {
             window.open('pages/dashboard/dashboard.php','_self');
           }
+          else{
+            $("#loginError").css('visibility','visible');
+          }
         }
       });
     }
@@ -107,6 +110,7 @@ if(!isset($_COOKIE["heldonid"]))
               <li><a href="#info-section">About</a></li>
               <li><a href="#feature-section">Features</a></li>
               <li><a href="#team-section">Products</a></li>
+              <li><a href="#testimonial-section">Testimonials</a></li>
               <li><a href="#contact-section">Contact</a></li>
             </ul>
           </div>
@@ -133,16 +137,21 @@ if(!isset($_COOKIE["heldonid"]))
               <div class="loginDiv clearfix">
                 <h2 class="login-title">Enter credentials to login</h2>
                 <form>
-                  <div class="form-group">
+                  <div class="form-group" onclick="$('#loginError').css('visibility','hidden');">
                     <input class="form-control myInput" type="text" placeholder="Enter username" id="user" required>
                     <span class="input-icon"><i class="fa fa-user"></i></span>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" onclick="$('#loginError').css('visibility','hidden');">
                     <input class="form-control myInput" type="password" placeholder="Enter password" id="pwd" required>
                     <span class="input-icon"><i class="fa fa-lock"></i></span>
                   </div>
+                  <div class="form-group" style="visibility:hidden;" id="loginError">
+                    <center>
+                    <small style="color:red;"><strong>Invalid credentials!</strong></small>
+                  </center>
+                  </div>
                   <div class="form-group"  style="color:white;padding-left:20px;"><br>
-                    <input type="checkbox" id="remember">&nbsp;&nbsp;&nbsp;&nbsp;<strong>Remember my account</strong>
+                    <input type="checkbox" id="remember">&nbsp;&nbsp;&nbsp;&nbsp;<strong>Keep me logged in!</strong>
                   </div>
                   <div class="text-center">
                     <button type="button" onclick="loginFunction();">Continue</button>
@@ -628,6 +637,30 @@ if(!isset($_COOKIE["heldonid"]))
       </div>
     </section>
 
+    <!--section-12-Google-Map-->
+	<div class="mapouter">
+    <div class="gmap_canvas">
+      <iframe width="100%" height="350" id="gmap_canvas" src="https://maps.google.com/maps?q=Gali%20No.%202%2C%20Aram%20Ngr%2C%20Nabi%20Karim%2C%20New%20Delhi%2C%20&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+      </iframe>
+      <a href="https://www.crocothemes.net"></a>
+    </div>
+    <style>
+    .mapouter{
+      position:relative;
+      text-align:right;
+      height:350px;
+      width:100%;
+    }
+      .gmap_canvas {
+        overflow:hidden;
+        background:none!important;
+        height:350px;
+        width:100%;
+        }
+      </style>
+    </div>
+	<!--section-12-Google-Map-->
+
 
     <!-- Footer Section -->
     <section id="contact-section" class="footer footer-bg">
@@ -686,23 +719,22 @@ if(!isset($_COOKIE["heldonid"]))
             <div class="meet-us animated fadeup">
               <h3 class="foot-title">MEET US</h3>
               <div class="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad atque corporis dignissimos eius eos est explicabo.</p>
+                <p>Regd. Address A273, T/F, Gali No. 2, Aram Ngr, Nabi Karim, New Delhi, Near Qutub Road, Delhi-110055<br><strong>CIN: U52510DL2019PTC346042</strong></p>
               </div>
             </div>
 
             <!--Contact Us Details-->
             <div class="cont-us animated fadeup">
               <h3 class="foot-title">Contact Us</h3>
-              <div><a class="hover" href="javascript:;">Landline : +061 - 1234 - 5678</a></div>
-              <div><a class="hover" href="javascript:;">Mobile : +1 987654 - 3210</a></div>
-              <div><a class="hover" href="javascript:;">Email : info@example.com</a></div>
+              <div><a class="hover" href="javascript:;">Mobile : +91-7372061500</a></div>
+              <div><a class="hover" href="javascript:;">Email : info@heldon.com</a></div>
             </div>
           </div>
 
           <!--Copyright Text-->
           <div class="col-md-12 col-sm-12 col-xs-12 sectionP40">
             <div class="copyright animated fadeup">
-              <p class="white">&copy; Copyright <script>document.write(new Date().getFullYear())</script>, all rights reserved.</p>
+              <p class="white">&copy; Copyright <script>document.write(new Date().getFullYear())</script> Heldon, all rights reserved.</p>
             </div>
           </div>
         </div>
