@@ -30,7 +30,7 @@ if(mysqli_num_rows($result)>0)
         echo 'confirm';
     }
     else{
-      echo 'failed'
+      echo 'failed';
     }
   }
 }

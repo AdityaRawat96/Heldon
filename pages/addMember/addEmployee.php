@@ -969,11 +969,32 @@
                   success: function(response)
                   {
                     alert(response);
+                  }
+                });
+              });
+              $("#uploadForm").on("submit", function(e){
+                e.preventDefault();
+
+                $.ajax({
+                  url:"../php/passwordMail.php",
+                  type:"POST",
+                  data: new FormData(this),
+                  contentType:false,
+                  cache:false,
+                  processData:false,
+                  beforeSend:function()
+                  {
+
+                  },
+                  success: function(response)
+                  {
+                    alert(response);
 
                   }
                 });
               });
             });
+
 
             </script>
 

@@ -136,7 +136,7 @@ if(!isset($_COOKIE["heldonid"]))
               <!--Login Div-->
               <div class="loginDiv clearfix">
                 <h2 class="login-title">Enter credentials to login</h2>
-                <form>
+                <form autocomplete="off">
                   <div class="form-group" onclick="$('#loginError').css('visibility','hidden');">
                     <input class="form-control myInput" type="text" placeholder="Enter username" id="user" required>
                     <span class="input-icon"><i class="fa fa-user"></i></span>
@@ -463,143 +463,131 @@ if(!isset($_COOKIE["heldonid"]))
               <!--Testimonial 1-->
               <div class="quote quote-text-3 hide-bottom" data-ppquote="li-quote-3">
                 <p>
-                  'Managing everyday banking has finally become fun, fast and easy. Icing on the cake, customer support is super reactive: 5 stars!'
+                  'Fast Service!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Thibaut Dumontet</div>
-                  <div class="job">Founder @Croquants Gourmands</div>
+                  <div class="name">Nidhi Singh</div>
                 </div>
               </div>
 
               <!--Testimonial 2-->
               <div class="quote quote-text-4 show" data-ppquote="li-quote-4">
                 <p>
-                  'Qonto met my needs straight away. Customer care is awesome! Period.'
+                  'Nice Products!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Rafaël de Lavergne</div>
-                  <div class="job">Founder @Totem</div>
+                  <div class="name">Pushkar Tripathi</div>
                 </div>
               </div>
 
               <!--Testimonial 3-->
               <div class="quote hide-bottom quote-text-5" data-ppquote="li-quote-5">
                 <p>
-                  'With Qonto, I've been able to order MasterCard cards in seconds. My purchasing team can now be autonomous with their payments. Qonto is game changer.'
+                  'Good Product!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Grégoire Pasquet</div>
-                  <div class="job">CEO @Worldia</div>
+                  <div class="name">Suresh Sharma</div>
                 </div>
               </div>
 
               <!--Testimonial 4-->
               <div class="quote hide-bottom quote-text-6" data-ppquote="li-quote-6">
                 <p>
-                  'Qonto? Easy, fast, efficient. Traditional banks' hassles belong to the past!'
+                  'Awesome Services!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Nicolas Katan</div>
-                  <div class="job">Founder @Bitit</div>
+                  <div class="name">Gyan Rathi</div>
                 </div>
               </div>
 
               <!--Testimonial 5-->
               <div class="quote hide-bottom quote-text-7" data-ppquote="li-quote-7">
                 <p>
-                  'Qonto? A flawless UX and a customer service that cares so much. This is just incredible!'
+                  'Good Product!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Mathieu Jouhet</div>
-                  <div class="job">Freelance @Hello Mat</div>
+                  <div class="name">Ankit Sharma</div>
                 </div>
               </div>
 
               <!--Testimonial 6-->
               <div class="quote hide-bottom quote-text-8" data-ppquote="li-quote-8">
                 <p>
-                  'I needed a bank similar to a SaaS for LiveMentor: I think I found it.'
+                  'Good Quality Products.'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Charles Lefebvre du Prey</div>
-                  <div class="job">Founder @LiveMentor</div>
+                  <div class="name">Udit Singh</div>
                 </div>
               </div>
 
               <!--Testimonial 7-->
               <div class="quote hide-bottom quote-text-9" data-ppquote="li-quote-9">
                 <p>
-                  'I can say 'Goodbye' to the banking pains I had to bear with, and 'hello' to a way to do finance that makes sense.'
+                  'Long lasting products!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Duc Ha Duong</div>
-                  <div class="job">CEO @Officience</div>
+                  <div class="name">Krishna Bisht</div>
                 </div>
               </div>
 
               <!--Testimonial 8-->
               <div class="quote hide-bottom quote-text-10" data-ppquote="li-quote-10">
                 <p>
-                  'Qonto is 100% in tune with what we do at Alan.eu: a user-friendly service, a user-centric interface and a very reactive customer support.'
+                  'Acha regulator hai!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Jean-Charles Samuelian</div>
-                  <div class="job">CEO @Alan</div>
+                  <div class="name">Mohit Tiwari</div>
                 </div>
               </div>
 
               <!--Testimonial 9-->
               <div class="quote hide-bottom quote-text-11" data-ppquote="li-quote-11">
                 <p>
-                  'I have been looking for a modern and efficient banking alternative that could support the development of my business. I'm just wondering why Qonto did not exist before!'
+                  'Nice One!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Louis Rouffineau</div>
-                  <div class="job">CEO @La Company</div>
+                  <div class="name">Rajesh Koranga</div>
                 </div>
               </div>
 
               <!--Testimonial 10-->
               <div class="quote hide-bottom quote-text-13" data-ppquote="li-quote-13">
                 <p>
-                  'That's just perfect - It rocks baby! You wanna apply at TheFamily? Use Qonto first.'
+                  'Low and Optimized cost.'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Oussama Ammar</div>
-                  <div class="job">Founder @TheFamily</div>
+                  <div class="name">Anjali Thapa</div>
                 </div>
               </div>
 
               <!--Testimonial 11-->
               <div class="quote quote-text-1 hide-bottom" data-ppquote="li-quote-1">
                 <p>
-                  'I wish I could have had Qonto enrolled in the Techstars Paris's first batch!'
+                  'Good Regulator!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Bertier Luyt</div>
-                  <div class="job">Managing Director @Techstars</div>
+                  <div class="name">Pooja Mehra</div>
                 </div>
               </div>
               <!--Testimonial 12-->
               <div class="quote quote-text-2 hide-bottom" data-ppquote="li-quote-2">
                 <p>
-                  'Thanks to a slick interface and simple features, managing payments and expenses has become a piece of cake!'
+                  'Good Quality Product!'
                 </p>
                 <div class="container-info">
                   <div class="pp"></div>
-                  <div class="name">Julian Aroun</div>
-                  <div class="job">Founder @Drapo</div>
+                  <div class="name">Surav Phulera</div>
                 </div>
               </div>
             </div>
