@@ -21,8 +21,10 @@ section {
     margin-bottom: 70px; }
   section .hv-container {
     flex-grow: 1;
-    overflow: auto;
+    overflow: hidden;
     justify-content: center; }
+  
+
 
 .basic-style {
   background-color: #EFE6E2; }

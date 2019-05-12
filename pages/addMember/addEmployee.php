@@ -6,6 +6,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>Turbo - Bootstrap Material Admin Dashboard Template</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
@@ -969,27 +970,6 @@
                   success: function(response)
                   {
                     alert(response);
-                  }
-                });
-              });
-              $("#uploadForm").on("submit", function(e){
-                e.preventDefault();
-
-                $.ajax({
-                  url:"../php/passwordMail.php",
-                  type:"POST",
-                  data: new FormData(this),
-                  contentType:false,
-                  cache:false,
-                  processData:false,
-                  beforeSend:function()
-                  {
-
-                  },
-                  success: function(response)
-                  {
-                    alert(response);
-
                   }
                 });
               });

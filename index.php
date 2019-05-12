@@ -47,37 +47,15 @@ if(!isset($_COOKIE["heldonid"]))
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
-    <script>
-    function loginFunction()
-    {
-      var rem="";
-      if($('#remember').is(":checked")){
-        rem="1";
-      }
-      else{
-        rem="0";
-      }
-
-      $.ajax({
-        type: 'POST',
-        url: 'pages/php/check.php',
-        data: { Username:$('#user').val(),Password:$('#pwd').val(),Remember:rem},
-
-        beforeSend: function() {
-        },
-        success: function(response) {
-          if(response.match(/confirm/))
-          {
-            window.open('pages/dashboard/dashboard.php','_self');
+      <style>
+          #fpwdLink{
+              color:white;
           }
-          else{
-            $("#loginError").css('visibility','visible');
+          #fpwdLink:hover{
+              color:yellow;
           }
-        }
-      });
-    }
-    </script>
+      </style>
+      <script src="myscript.js"></script>
 
   </head>
   <body>
@@ -127,9 +105,9 @@ if(!isset($_COOKIE["heldonid"]))
             <div class="col-md-6 col-sm-6 col-xs-12">
               <!--Banner Left-Text-->
               <div class="banner-text">
-                <h1 class="big-text">Whole Suite for your Commerce business.</h1>
-                <p class="content">Be one step ahead of your competitors.</p>
-                <button class="btn orange-btn">Get Theme Now</button>
+                <h1 class="big-text">Our Motive is to deliver best engineered regulators</h1>
+                <p class="content">We ensure customer satisfaction!</p>
+
               </div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 pull-right">
@@ -137,24 +115,29 @@ if(!isset($_COOKIE["heldonid"]))
               <div class="loginDiv clearfix">
                 <h2 class="login-title">Enter credentials to login</h2>
                 <form autocomplete="off">
-                  <div class="form-group" onclick="$('#loginError').css('visibility','hidden');">
+                  <div class="form-group" onclick="$('#loginError').css('display','none');">
                     <input class="form-control myInput" type="text" placeholder="Enter username" id="user" required>
                     <span class="input-icon"><i class="fa fa-user"></i></span>
                   </div>
-                  <div class="form-group" onclick="$('#loginError').css('visibility','hidden');">
+                  <div class="form-group" onclick="$('#loginError').css('display','none');">
                     <input class="form-control myInput" type="password" placeholder="Enter password" id="pwd" required>
                     <span class="input-icon"><i class="fa fa-lock"></i></span>
                   </div>
-                  <div class="form-group" style="visibility:hidden;" id="loginError">
+                  <div class="form-group" style="display:none;" id="loginError">
                     <center>
                     <small style="color:red;"><strong>Invalid credentials!</strong></small>
                   </center>
                   </div>
-                  <div class="form-group"  style="color:white;padding-left:20px;"><br>
-                    <input type="checkbox" id="remember">&nbsp;&nbsp;&nbsp;&nbsp;<strong>Keep me logged in!</strong>
+                  <div class="form-group">
+                    <span class="form-control myInput" style="color:white;"><small style="position:relative; top:12px;">Keep me logged in!</small></span>
+                    <span class="input-icon"><input type="checkbox" id="remember"></i></span>
                   </div>
                   <div class="text-center">
                     <button type="button" onclick="loginFunction();">Continue</button>
+                  </div>
+                  <div class="form-group">
+                    <span class="form-control myInput" style="color:white;"><a href="pages/php/forgotPassword.php" id="fpwdLink"><small style="position:relative; top:12px;">Forgot Password?</small></a></span>
+                    <span class="input-icon"><i class="fas fa-question-circle"></i></span>
                   </div>
                 </form>
               </div>
@@ -176,7 +159,9 @@ if(!isset($_COOKIE["heldonid"]))
           </div>
 
           <div class="content animated fadeleft">
-            <p>We provide a business opportunity that is very popular with people looking for part-time, flexible businesses. Our business model depends on person-to-person by independent representatives, often working from home. We follow multi-tier model. Each distributor is essentially an independent business owner, or more accurately put, an independent sales representative.</p>
+            <p>Our Regulators meet the best of market needs.We provide the finest quality of regulators to the clients.
+               Our production unit always keep testing the limits of regulators.
+              We ensure a good quality product. Each distributor makes sure that our clients get qood quality product in optimized cost.</p>
             <p class="highlight-text">We are a Multilevel-Marketting(MLM) experts.</p>
           </div>
         </div>
@@ -191,7 +176,7 @@ if(!isset($_COOKIE["heldonid"]))
               <span class="play-icon"><i class="fa fa-play light"></i></span>
             </a>
             <!--Video Thumb Image-->
-            <img class="img-responsive" src="assets/images/video-thumb.jpg" alt="image">
+            <img class="img-responsive" src="assets/images/new.jpg" alt="image">
           </div>
         </div>
       </div>
@@ -665,30 +650,35 @@ if(!isset($_COOKIE["heldonid"]))
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="row">
                 <!--Contact Form-->
-                <form action="#">
+                <form>
                   <div class="form-group col-sm-6 animated fadeup">
-                    <input class="myInput" placeholder="Full Name" id="queryname" type="text" required>
+                    <input class="myInput" placeholder="Full Name" id="queryname" type="text" autocomplete="off" >
                     <span class="input-icon"><i class="fa fa-user"></i></span>
+                    <small id="nameError" style="color:red; display:none; font-size:16px;">Please enter valid name.</small>
                   </div>
                   <div class="form-group col-sm-6 animated fadeup" style="animation-delay: .15s">
-                    <input class="myInput" placeholder="Email Address" id="queryemail" type="text" required>
-                    <span class="input-icon"><i class="fa fa-envelope-o"></i></span>
+                    <input class="myInput" placeholder="Email Address" id="queryemail" type="text" autocomplete="off" >
+                    <span class="input-icon"><i class="fas fa-envelope-open-text"></i></span>
+                    <small id="emailError" style="color:red; display:none; font-size:16px;">Please enter valid email.</small>
                   </div>
-                  <div class="form-group col-sm-6 animated fadeup">
-                    <input class="myInput" placeholder="Mobile or Telephone"id="querycontact" type="text" required>
+                  <div class="form-group col-sm-6 animated fadeup"  style="animation-delay: .15s">
+                    <input class="myInput" placeholder="Mobile or Telephone"id="querycontact" autocomplete="off" type="text" >
                     <span class="input-icon"><i class="fa fa-phone"></i></span>
+                      <small id="contactError" style="color:red; display:none; font-size:16px;">Please enter valid contact.</small>
                   </div>
                   <div class="form-group col-sm-6 animated fadeup" style="animation-delay: .15s">
-                    <input class="myInput" placeholder="Subject" id="querysubject" type="text" required>
+                    <input class="myInput" placeholder="Subject" id="querysubject" type="text" autocomplete="off" >
                     <span class="input-icon"><i class="fa fa-puzzle-piece"></i></span>
+                      <small id="subjectError" style="color:red; display:none; font-size:16px;">Please enter valid Subject.</small>
                   </div>
                   <div class="form-group col-sm-12 animated fadeup">
-                    <textarea class="myInput" id="querymessage" placeholder="Type your message here..." name="" id="" cols="30" rows="4"></textarea>
+                    <textarea class="myInput" id="querymessage" placeholder="Type your message here..." name="" id="" autocomplete="off" cols="30" rows="4"></textarea>
                     <span class="input-icon"><i class="fa fa-comments"></i></span>
+                      <small id="messageError" style="color:red; display:none; font-size:16px;">Please enter valid Message.</small>
                   </div>
 
                   <div class="col-sm-12 animated fadeup" style="animation-delay: .15s">
-                    <button class="btn orange-btn pull-right" onclick="queryInput();">Send Query</button>
+                    <button class="btn orange-btn pull-right" onclick="queryInput();" id="queryBtn" type="button">Send Query</button>
                   </div>
                 </form>
                 <!--Testimonial 1-->
@@ -770,27 +760,9 @@ if(!isset($_COOKIE["heldonid"]))
     <!--Main | Common Js-->
     <script type="text/javascript" src="assets/js/main.js"></script>
     <script>
-    function queryInput()
-    {
-      $.ajax({
-        type: 'POST',
-        url: 'pages/php/addQuery.php',
-        data: { Name:$('#queryname').val(),Email:$('#queryemail').val(),Contact:$('#querycontact').val(),Subject:$('#querysubject').val(),Message:$('#querymessage').val()},
 
-        beforeSend: function() {
-        },
-        success: function(response) {
-          if(response.match(/success/))
-          {
-            alert('Query Successfully Placed');
-          }
-          else
-          {
-            alert('Not able to place your Query at the moment.Please try again later.Sorry for inconvinience');
-          }
-        }
-      });
-    }
+
+
     </script>
   </body>
   </html>

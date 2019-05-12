@@ -71,7 +71,7 @@ $(document).ready(function(){
     $('.sidebar [data-toggle="collapse"]').on("click", function(event) {
         if($('body').hasClass('compact-menu') || $('body').hasClass('horizontal-menu')) {
             if (window.matchMedia('(min-width: 992px)').matches) {
-                //Disable click on sidebar menu collapsible item when compact menu mode or horizontal menu mode is in use 
+                //Disable click on sidebar menu collapsible item when compact menu mode or horizontal menu mode is in use
                 //to avoid ambiguity of mixed hover and click on menu item
                 return false;
             }

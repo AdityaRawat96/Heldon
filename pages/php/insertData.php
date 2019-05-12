@@ -4,6 +4,7 @@ session_start();
 //echo $sex;echo $age;echo $dob;echo $fh;echo $nomineeName;echo $nomineeID;echo $relation;echo $occupation;echo $mailingAddress;echo $permanentAddress;echo $postOffice;echo $policeStation;echo $district;echo $state;echo $pin;echo $email;echo $contact1;echo $contact2;echo $amount;echo $mop;echo $rDate;echo $ddNo;echo $pan;echo $productDetails;echo $bankName;echo $accountNo;echo $ifsc;echo $maintainedAt;
 
 include('connection.php');
+require("../php/class.phpmailer.php");
 $name=$_POST['name'];
 $sex=$_POST['sex'];
 $age=$_POST['age'];
@@ -80,6 +81,7 @@ $result=mysqli_query($con,$sql) or die(mysqli_error($con));
 if(mysqli_num_rows($result)>0)
 {
   $row=mysqli_fetch_array($result);
+  $nomineeEmployeeAdded=$row['noOfEmployeeAdded']+1;
   $hierarchy=$row['hierarchy']+1;
   $nomineeName=$row['name'];
   $generator = "9870634521";
@@ -102,8 +104,42 @@ if(mysqli_num_rows($result)>0)
     if($result)
     {
       $result1=mysqli_query($con,"insert into users(name,referencedId,paymentStatus,hierarchy,image) values('$name','$nomineeID','0','$hierarchy','$path')") or die (mysqli_query($con));
-      $result2=mysqli_query($con,"update userinfo set noOfEmployeeAdded=noOfEmployeeAdded+1 where Id='$nomineeID'") or die(mysqli_error($con));
-      echo "data entered successfully";
+      $result2=mysqli_query($con,"update userinfo set noOfEmployeeAdded = '$nomineeEmployeeAdded' where Id='$nomineeID'") or die(mysqli_error($con));
+      $mail = new PHPMailer();
+
+      $mail->IsSMTP();
+      $mail->Host = "wtsolutions.cc";
+
+      $mail->SMTPAuth = true;
+      $mail->Port = 587;
+      $mail->Username = "example@wtsolutions.cc";
+      $mail->Password = "Tiger@1995";
+
+      $mail->setFrom('example@wtsolutions.cc', 'Heldon');
+
+      $mail->addAddress($email, $name);
+      $mail->addReplyTo('example@wtsolutions.cc', 'Heldon');
+      $mail->isHTML(true);
+
+      $mail->Subject = 'Your Login Credentials | Heldon';
+      $mail->Body    = '<html>
+      <body>
+      <h4>Dear '.$name.'&nbsp;&nbsp;<strong>thanks for connecting with us.</strong><br>Your password is<br><br><strong>'.$password.'<br><strong>Your username is same as your email</strong>
+      </strong>
+      </h4>
+      <br>
+      This is a system generated email so do not reply.
+      </body>
+      </html>';
+
+      $mail->AltBody = 'Hi Thanks for contacting us we will reach out to you within 24 hours.';
+
+      if(!$mail->send()) {
+        echo "error ocuured!";
+      }
+      else{
+        echo "data entered successfully";
+      }
     }
     else
     {

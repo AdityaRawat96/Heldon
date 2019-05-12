@@ -4,6 +4,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>Turbo - Bootstrap Material Admin Dashboard Template</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
@@ -67,9 +68,9 @@ li
 }
 </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" type="text/javascript"></script>
-    
+
 </head>
-<body onload="myAJAXFunction();">   
+<body onload="myAJAXFunction();">
     <div class="wrapper">
 
     <!--  Sidebar included     -->
@@ -81,11 +82,11 @@ li
       <?php include('../pageElements/navbar.php'); ?>
 
       <div class="content">
-        
+
           <div class="container-fluid">
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" autocomplete="off">
                 <ul id="myUL">
-  
+
                 </ul>
               <div class="row" id="optionRow" style="display:none;">
                   <button id="closingBtn" class="close" onclick="closingButton();"><i class="material-icons" style="color:black;font-size:20px;margin-right:20px;">cancel</i></button>
@@ -100,6 +101,7 @@ li
                     <button onclick="changeFunction();" class="btn btn-success">Change</button>
                 </div>
               </div>
+              <br>
             <div id="viewInfo" class="col-md-2" style="display:none;">
               <button class="btn btn-primary" id="viewInfoBtn" onclick="infoFunction();" style="margin-top:-10px;">View Info</button>
               </div>
@@ -125,21 +127,21 @@ li
                   </div>
               </div>
           </section>
-              
+
         <section id="infoPage" style="position:relative; min-height:750px;display:none;">
             <?php
                 include('../php/secondsection.php');
             ?>
         </section>
-              
+
           </div>
-          
+
         </div>
-        
+
         <?php include('../pageElements/footer.php'); ?>
-        
+
         </div>
-    
+
     </div>
 
 
@@ -174,7 +176,7 @@ function myFunction() {
 </script>
 
 </body>
-    
+
     <script src="../../assets/vendors/jquery-ui.min.js" type="text/javascript"></script>
 <script src="../../assets/vendors/bootstrap.min.js" type="text/javascript"></script>
 <script src="../../assets/vendors/material.min.js" type="text/javascript"></script>
@@ -213,7 +215,7 @@ function myFunction() {
 <script src="../../assets/js/demo.js"></script>
 
 <script src="../../assets/vendors/dropzone/dropzone.min.js"></script>
-    
+
 
     <script type="text/javascript">
 var currentId;
@@ -288,11 +290,11 @@ function hideChildren(child){
   $("#"+name+"").css("display", "none");
   $("#"+current+"").addClass("mainHide");
 }
-        
+
 
 
 </script>
-    
+
     <script>
         var requser="";
          $(document).ready(function(){
@@ -301,7 +303,7 @@ function hideChildren(child){
             });
         function myAJAXFunction()
         {
-            
+
             $.ajax({
                     type: 'POST',
                     url: 'getData.php',
@@ -314,12 +316,12 @@ function hideChildren(child){
                     $('#myUL').html(response);
                 }
                 });
-            
+
         }
-        
+
         function update(id)
         {
-            
+
             searchParent(id);
             requser=id;
             $('#myUL').css('display','none');
@@ -329,7 +331,7 @@ function hideChildren(child){
             $('#viewInfo').css('display','block');
             $('#paymentStatus').css('display','none');
         }
-        
+
         function btnClick()
         {
             if($("#paymentStatus").is(":visible"))
@@ -359,9 +361,9 @@ function hideChildren(child){
                 }
                 });
             }
-           
+
         }
-        
+
         function changeFunction()
         {
             var aid=$('.ref').attr('id');
@@ -385,15 +387,15 @@ function hideChildren(child){
                     }
                 }
                 });
-            
+
         }
-        
+
         function closingButton()
         {
             $('#optionRow').slideUp();
             $('#paymentStatus').css('display','none');
         }
-        
+
         function infoFunction()
         {
             var aid=$('.ref').attr('id');
@@ -411,7 +413,6 @@ function hideChildren(child){
 
                     },
                 success: function(response) {
-                    alert(response);
                     $('#name').val(response.substring(0,response.indexOf('=')));
                     response=response.substring(response.indexOf('=')+1);
                     $('#email').val(response.substring(0,response.indexOf('=')));
@@ -424,7 +425,7 @@ function hideChildren(child){
                     response=response.substring(response.indexOf('=')+1);
                     $('#occupation').val(response.substring(0,response.indexOf('=')));
                     response=response.substring(response.indexOf('=')+1);
-                    
+
                     $('#mailingAddress').val(response.substring(0,response.indexOf('=')));
                     response=response.substring(response.indexOf('=')+1);
                     $('#permanentAddress').val(response.substring(0,response.indexOf('=')));
@@ -435,7 +436,7 @@ function hideChildren(child){
                     response=response.substring(response.indexOf('=')+1);
                     $('#state').val(response.substring(0,response.indexOf('=')));
                     response=response.substring(response.indexOf('=')+1);
-                    
+
                 }
                 });
             }
@@ -443,15 +444,15 @@ function hideChildren(child){
             {
                 $('#viewInfoBtn').text("View Info");
                 $('#infoPage').css('display','none');
-                $('#sec').css('display','block');     
+                $('#sec').css('display','block');
             }
         }
-        
-        
+
+
         function advanceDetails()
         {
           if($('#show').text()=='Advance Details')
-          {      
+          {
             $('#show').text("Show Less");
             $("#down").slideDown();
           }

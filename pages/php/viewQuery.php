@@ -43,33 +43,36 @@
 
       <div class="content">
         <div class="container-fluid">
-            
-            <div  id="dataContainer">
 
-            </div>
+          <div  id="dataContainer">
 
-        <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Contact</th>
-        <th>Subject</th>
-        <th>Message</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-                <?php
-                    include('connection.php');
-                    $result=mysqli_query($con,'select * from Query')or die(mysqli_error($con));
-                    if(mysqli_num_rows($result)>0)
-                    {
-                        while($row=mysqli_fetch_array($result))
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-content">
+                  <h4 class="card-title">User Queries:</h4><br>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead class="text-primary">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </thead>
+                      <tbody>
+                        <?php
+                        include('connection.php');
+                        $result=mysqli_query($con,'SELECT * from Query ORDER BY id DESC ')or die(mysqli_error($con));
+                        if(mysqli_num_rows($result)>0)
                         {
+                          while($row=mysqli_fetch_array($result))
+                          {
                             $id=$row['id'];
                             $name=$row['name'];
                             $email=$row['email'];
@@ -78,20 +81,25 @@
                             $message=$row['message'];
                             $status=$row['status'];
                             ?>
-                                <tr><td><?php echo $id; ?></td><td><?php echo $name; ?></td><td><?php echo $email; ?></td><td><?php echo $contact; ?></td><td><?php echo $subject; ?></td><td><?php echo $message; ?></td><td><?php echo $status; ?></td><td><i class="material-icons" title="Add Response" style="cursor:pointer" onclick="addResponse('<?php echo $id; ?>')">add</i></td></tr>
+                            <tr><td><?php echo $id; ?></td><td><?php echo $name; ?></td><td><?php echo $email; ?></td><td><?php echo $contact; ?></td><td><?php echo $subject; ?></td><td><?php echo $message; ?></td><td><?php echo $status; ?></td><td><i class="material-icons" title="Add Response" style="cursor:pointer" onclick="addResponse('<?php echo $id; ?>')">add</i></td></tr>
                             <?php
-
+                          }
                         }
-                    }
-                    else
-                    {
-                        
-                    }
-                ?>
-            </tbody>
-        </table>
-
-
+                        else{
+                          ?>
+                          <tr>
+                            <td colspan='8'>No data available!</td>
+                          </tr>
+                          <?php
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -147,47 +155,47 @@
 
 <script src="../../assets/vendors/dropzone/dropzone.min.js"></script>
 <script>
-    function addResponse(id)
-  {
-    var rowId=id;
-    $.ajax({
-      type: 'post',
-      url: '../php/getQuery.php',
-      data: {
-        rowId: rowId
-      },
-      success: function( data ) {
-        
-        $("#dataContainer").html(data);
-        $("#myButton").trigger( "click" );
-      }
-    });
-  }
-    
-    
-function responseSubmitted(){
-    if($('#responseArea').val()=="")
-    {
-      alert('Please enter any response');
-      return false;
+function addResponse(id)
+{
+  var rowId=id;
+  $.ajax({
+    type: 'post',
+    url: '../php/getQuery.php',
+    data: {
+      rowId: rowId
+    },
+    success: function( data ) {
+
+      $("#dataContainer").html(data);
+      $("#myButton").trigger( "click" );
     }
-    $.ajax({
-      type: 'POST',
-      url: '../php/sendMailQuery.php',
-      data: {responseValue:$('#responseArea').val(),email:$('#email').val(),name:$('#name').val()},
+  });
+}
 
-      beforeSend: function() {
 
-      },
-      success: function(response) {
-        if(response.match(/error/)){
-         alert('Error in sending mail.Please try again later');
-        }
-        else{
-          alert("Mail send successfully");
-        }
-      }
-    });
+function responseSubmitted(){
+  if($('#responseArea').val()=="")
+  {
+    alert('Please enter any response');
+    return false;
   }
+  $.ajax({
+    type: 'POST',
+    url: '../php/sendMailQuery.php',
+    data: {responseValue:$('#responseArea').val(),email:$('#email').val(),name:$('#name').val()},
+
+    beforeSend: function() {
+
+    },
+    success: function(response) {
+      if(response.match(/error/)){
+        alert('Error in sending mail.Please try again later');
+      }
+      else{
+        alert("Mail send successfully");
+      }
+    }
+  });
+}
 </script>
 </html>
