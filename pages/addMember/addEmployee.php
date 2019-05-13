@@ -25,7 +25,18 @@
   <link href="../../assets/vendors/dropzone/dropzone.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+  <style media="screen">
 
+  /* Hide HTML5 Up and Down arrows. */
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  </style>
 
   <script type="text/javascript">
 
@@ -45,11 +56,43 @@
 
   }
 
+  jQuery(document).ready( function($) {
+
+    // Disable scroll when focused on a number input.
+    $('form').on('focus', 'input[type=number]', function(e) {
+      $(this).on('wheel', function(e) {
+        e.preventDefault();
+      });
+    });
+
+    // Restore scroll on number inputs.
+    $('form').on('blur', 'input[type=number]', function(e) {
+      $(this).off('wheel');
+    });
+
+    // Disable up and down keys.
+    $('form').on('keydown', 'input[type=number]', function(e) {
+      if ( e.which == 38 || e.which == 40 )
+      e.preventDefault();
+    });
+
+    $('form input').on('keypress', function(e) {
+      return e.which !== 13;
+    });
+
+
+  });
+
   </script>
 
 </head>
 
 <body>
+  <div class="loader" style="display:none; padding-top:25%; z-index:300; position:fixed; height:100%; width:100%; background-color:black; opacity: 0.8;">
+    <center>
+      <img src="../../assets/images/preloader.gif" style="position:relative; height:40px; width:40px;">
+    </center>
+  </div>
   <div class="wrapper">
 
     <!--  Sidebar included     -->
@@ -144,7 +187,7 @@
                                 <label class="control-label">Name
                                   <small>(required)</small>
                                 </label>
-                                <input name="name" type="text" class="form-control" id="name" required>
+                                <input name="name" type="text" class="form-control" id="name" required style="text-transform:capitalize;"  maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                               </div>
                             </div>
                             <div class="input-group">
@@ -155,7 +198,7 @@
                                 <label class="control-label">Age
                                   <small>(required)</small>
                                 </label>
-                                <input name="age" type="text" class="form-control" id="age" required>
+                                <input name="age" type="number" class="form-control" id="age" maxlength="3" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                               </div>
                             </div>
                             <div class="input-group">
@@ -182,7 +225,7 @@
                                   <label class="control-label" id="dateError">Date of Birth
                                     <small>(required)</small>
                                   </label>
-                                  <input type="text" id="dob" required class="datepicker form-control" onkeydown="return false;" name="dob" onblur="$('#divdib').removeClass('is-empty');" />
+                                  <input type="text" id="dob" required maxlength="10" class="datepicker form-control" onkeydown="return false;" name="dob" onblur="$('#divdib').removeClass('is-empty');" />
                                 </div>
                               </div>
                             </div>
@@ -197,7 +240,7 @@
                                   <label class="control-label">Father's Name
                                     <small>(required)</small>
                                   </label>
-                                  <input name="fname" type="text" class="form-control" id="fname" required>
+                                  <input name="fname" type="text" class="form-control" id="fname" required style="text-transform:capitalize;" maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                 </div>
                               </div><br>
                               <center><span><strong>OR</strong></span></center>
@@ -210,7 +253,7 @@
                                   <label class="control-label">Husband's Name
                                     <small>(required)</small>
                                   </label>
-                                  <input name="hname" type="text" class="form-control" id="hname" disabled required>
+                                  <input name="hname" type="text" class="form-control" id="hname" disabled required style="text-transform:capitalize;" maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                 </div>
                               </div>
                               <div class="input-group">
@@ -221,7 +264,7 @@
                                   <label class="control-label">Relation with Applicant
                                     <small>(required)</small>
                                   </label>
-                                  <input name="relation" type="text" class="form-control" id="relation" required>
+                                  <input name="relation" type="text" class="form-control" id="relation" required style="text-transform:capitalize;" maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                 </div>
                               </div>
                               <div class="input-group">
@@ -232,7 +275,7 @@
                                   <label class="control-label">Occupation of Applicant
                                     <small>(required)</small>
                                   </label>
-                                  <input name="occupation" type="text" class="form-control" id="occupation" required>
+                                  <input name="occupation" type="text" class="form-control" id="occupation" required style="text-transform:capitalize;" maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                 </div>
                               </div>
                             </div>
@@ -251,7 +294,7 @@
                                     <label class="control-label">Mailing Address
                                       <small>(required)</small>
                                     </label>
-                                    <input name="mailingAddress" type="text" class="form-control" id="mailingAddress" required>
+                                    <input name="mailingAddress" type="text" class="form-control" style="text-transform:capitalize;" id="mailingAddress" required maxlength="150" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -265,7 +308,7 @@
                                     <label class="control-label">Permanent Address
                                       <small>(required)</small>
                                     </label>
-                                    <input name="permanentAddress" type="text" class="form-control" id="permanentAddress" required>
+                                    <input name="permanentAddress" type="text" class="form-control" style="text-transform:capitalize;" id="permanentAddress" required maxlength="150" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -279,7 +322,7 @@
                                     <label class="control-label">Post Office
                                       <small>(required)</small>
                                     </label>
-                                    <input name="PO" type="text" class="form-control" id="PO" required>
+                                    <input name="PO" type="text" class="form-control" id="PO" style="text-transform:capitalize;" required maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                   <span class="input-group-addon">
                                     <i class="fas fa-map-marker fa-lg"></i>
@@ -288,7 +331,7 @@
                                     <label class="control-label">Police Station
                                       <small>(required)</small>
                                     </label>
-                                    <input name="PS" type="text" class="form-control" id="PS" required>
+                                    <input name="PS" type="text" class="form-control" id="PS" style="text-transform:capitalize;" required maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -302,7 +345,7 @@
                                     <label class="control-label">District
                                       <small>(required)</small>
                                     </label>
-                                    <input name="district" type="text" class="form-control" id="district" required>
+                                    <input name="district" type="text" class="form-control" id="district" style="text-transform:capitalize;" required maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                   <span class="input-group-addon">
                                     <i class="fas fa-map-marker-alt fa-lg"></i>
@@ -311,7 +354,7 @@
                                     <label class="control-label">State
                                       <small>(required)</small>
                                     </label>
-                                    <input name="state" type="text" class="form-control" id="state" required>
+                                    <input name="state" type="text" class="form-control" id="state" style="text-transform:capitalize;" required maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -326,7 +369,7 @@
                                     <label class="control-label">PIN code/Ward No.
                                       <small>(required)</small>
                                     </label>
-                                    <input name="pin" type="text" class="form-control" id="pin" required>
+                                    <input name="pin" type="number" class="form-control" id="pin" required maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -341,7 +384,7 @@
                                     <label class="control-label">E-mail
                                       <small>(required)</small>
                                     </label>
-                                    <input name="email" type="email" class="form-control" id="email" required>
+                                    <input name="email" type="email" class="form-control" id="email" required maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -355,7 +398,7 @@
                                     <label class="control-label">Contact 1
                                       <small>(required)</small>
                                     </label>
-                                    <input name="contact1" type="text" class="form-control" id="contact1" required>
+                                    <input name="contact1" type="number" class="form-control" id="contact1" required maxlength="10" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                   <span class="input-group-addon">
                                     <i class="fas fa-phone-volume fa-lg"></i>
@@ -364,7 +407,7 @@
                                     <label class="control-label">Contact 2
                                       <small>(required)</small>
                                     </label>
-                                    <input name="contact2" type="text" class="form-control" id="contact2" required>
+                                    <input name="contact2" type="number" class="form-control" id="contact2" required  maxlength="10" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -379,7 +422,7 @@
                                     <label class="control-label">Senior Name
                                       <small></small>
                                     </label>
-                                    <input name="senior" type="text" class="form-control" id="senior" required>
+                                    <input name="senior" type="text" class="form-control" id="senior" style="text-transform:capitalize;" required maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -401,7 +444,7 @@
                                   <label class="control-label">Amount
                                     <small>(required)</small>
                                   </label>
-                                  <input name="amount" type="text" class="form-control" id="amount" required>
+                                  <input name="amount" type="number" class="form-control" id="amount" required  maxlength="10" requiredoninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                 </div>
                               </div>
 
@@ -413,7 +456,7 @@
                                   <label class="control-label">Amount(in words)
                                     <small>(required)</small>
                                   </label>
-                                  <input name="amountwords" type="text" class="form-control" id="amountwords" required>
+                                  <input name="amountwords" type="text" class="form-control" style="text-transform:capitalize;" id="amountwords" required>
                                 </div>
                               </div>
 
@@ -442,7 +485,7 @@
                                     <label class="control-label" id="dateError1">Receipt Date
                                       <small>(required)</small>
                                     </label>
-                                    <input type="text" id="rDate" required class="datepicker form-control" onkeydown="return false;" name="rDate" onblur="$('#divdib1').removeClass('is-empty');" disabled/>
+                                    <input type="text" id="rDate" required class="datepicker form-control" maxlength="10" onkeydown="return false;" name="rDate" onblur="$('#divdib1').removeClass('is-empty');" disabled/>
                                   </div>
                                 </div>
 
@@ -454,7 +497,7 @@
                                     <label class="control-label">Demand Draft No.
                                       <small>(required)</small>
                                     </label>
-                                    <input name="ddNo" type="text" class="form-control" id="ddNo" disabled required/>
+                                    <input name="ddNo" type="text" class="form-control" id="ddNo" disabled required maxlength="30" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
                                   </div>
                                 </div>
 
@@ -466,7 +509,7 @@
                                     <label class="control-label">PAN Number
                                       <small>(required)</small>
                                     </label>
-                                    <input name="pan" type="text" class="form-control" id="pan" required>
+                                    <input name="pan" type="text" class="form-control" id="pan" style="text-transform:uppercase;" required maxlength="15" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -486,7 +529,7 @@
                                     <label class="control-label">Product
                                       <small>(required)</small>
                                     </label>
-                                    <input name="product" type="text" class="form-control" id="product" required>
+                                    <input name="product" type="text" class="form-control" id="product" style="text-transform:capitalize;" required>
                                   </div>
                                 </div>
                               </div>
@@ -508,7 +551,7 @@
                                     <label class="control-label">Bank Name
                                       <small>(required)</small>
                                     </label>
-                                    <input name="bankName" type="text" class="form-control" id="bankName" required>
+                                    <input name="bankName" type="text" class="form-control" id="bankName" style="text-transform:capitalize;" required maxlength="50" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -522,7 +565,7 @@
                                     <label class="control-label">Account No.
                                       <small>(required)</small>
                                     </label>
-                                    <input name="accountNo" type="text" class="form-control" id="accountNo" required>
+                                    <input name="accountNo" type="text" class="form-control" id="accountNo" required maxlength="24" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -536,7 +579,7 @@
                                     <label class="control-label">IFSC
                                       <small>(required)</small>
                                     </label>
-                                    <input name="ifsc" type="text" class="form-control" id="ifsc" required>
+                                    <input name="ifsc" type="text" class="form-control" style="text-transform:uppercase;" id="ifsc" required maxlength="12" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -550,7 +593,7 @@
                                     <label class="control-label">Maintained At
                                       <small>(required)</small>
                                     </label>
-                                    <input name="maintainedAt" type="text" class="form-control" id="maintainedAt" required>
+                                    <input name="maintainedAt" type="text" class="form-control" id="maintainedAt" style="text-transform:capitalize;" required>
                                   </div>
                                 </div>
                               </div>
@@ -698,7 +741,7 @@
                                 <div class="wizard-footer">
                                   <div class="pull-right">
                                     <input type='button' id="nextButton" class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Next' />
-                                    <input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' id="submitbtn" name='finish' value='Finish' />
+                                    <input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' id="submitbtn" name='finish' value='Finish'/>
                                   </div>
                                   <div class="pull-left">
                                     <input type='button' id="prevButton" class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
@@ -780,75 +823,15 @@
               demo.initFormExtendedDatetimepickers();
               demo.initMaterialWizard();
 
-              $('#ephone').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57) return false;
-                else if($('#ephone').val().length >= 10)
-                {
-                  return false;
-                }
-              });
-
-              $('#age').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57) return false;
-                else if($('#age').val().length >= 3)
-                {
-                  return false;
-                }
-              });
-
-              $('#pin').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57) return false;
-                else if($('#pin').val().length >= 6)
-                {
-                  return false;
-                }
-              });
-
-              $('#contact1').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57) return false;
-                else if($('#contact1').val().length >= 10)
-                {
-                  return false;
-                }
-              });
-
-              $('#contact2').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57) return false;
-                else if($('#contact2').val().length >= 10)
-                {
-                  return false;
-                }
-              });
-              $('#amountwords').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57){
-                  return true;
+              function copyAddress(checkbox){
+                if(checkbox.checked == true){
+                  $("#permanentAddress").val($("#currentAddress").val());
                 }
                 else{
-                  return false;
+                  $("#permanentAddress").val('');
                 }
-              });
-
-              $('#amount').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57) return false;
-                else if($('#amount').val().length >= 10)
-                {
-                  return false;
-                }
-              });
-
-              $('#accountNo').keypress(function(key) {
-                if(key.charCode < 48 || key.charCode > 57) return false;
-              });
+              }
             });
-
-            function copyAddress(checkbox){
-              if(checkbox.checked == true){
-                $("#permanentAddress").val($("#currentAddress").val());
-              }
-              else{
-                $("#permanentAddress").val('');
-              }
-            }
 
             function confirmResult(){
               $("#confirmwizardPicturePreview").attr("src",$('#wizardPicturePreview').attr("src"));
@@ -965,15 +948,29 @@
                   processData:false,
                   beforeSend:function()
                   {
-
+                    $('.loader').fadeIn();
                   },
                   success: function(response)
                   {
-                    alert(response);
+                    $('.loader').fadeOut();
+                    showAlert();
                   }
                 });
               });
             });
+
+            function showAlert(){
+              swal({
+                title: "Done!",
+                timer: 5000,
+                text: "Employee added successfully!",
+                buttonsStyling: false,
+                confirmButtonClass: "btn btn-success",
+                type: "success"
+              }).then(function(){
+                window.open('addEmployee.php','_self');
+              });
+            }
 
 
             </script>
