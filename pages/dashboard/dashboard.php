@@ -37,6 +37,9 @@ if(isset($_SESSION['id']))
 
     <script type="text/javascript">
     $(document).ready(function(){
+      $(document).ajaxComplete(function () {
+            $('.loader').fadeOut();
+       });
       $(".hv-container").perfectScrollbar();
     });
 
@@ -45,6 +48,13 @@ if(isset($_SESSION['id']))
   </head>
 
   <body onload="searchParent(<?php echo $_SESSION['id'] ?>);">
+
+    <div class="loader" style="z-index:300; position:fixed; height:100%; width:100%; background-color:black; opacity: 0.8; padding-top:45vh;">
+      <center>
+        <img src="../../assets/images/preloader.svg" style="position:relative; height:50px; width:50px;">
+      </center>
+    </div>
+
     <div class="wrapper">
 
       <!--  Sidebar included     -->

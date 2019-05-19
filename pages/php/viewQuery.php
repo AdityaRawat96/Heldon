@@ -26,11 +26,22 @@
 
   <link rel="stylesheet" href="../../assets/css/hierarchy-view.css">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.loader').fadeOut();
+    $(".table-responsive").perfectScrollbar();
+  });
 
+  </script>
 
 </head>
 
 <body>
+  <div class="loader" style="z-index:300; position:fixed; height:100%; width:100%; background-color:black; opacity: 0.8; padding-top:45vh;">
+    <center>
+      <img src="../../assets/images/preloader.svg" style="position:relative; height:50px; width:50px;">
+    </center>
+  </div>
   <div class="wrapper">
 
     <!--  Sidebar included     -->
@@ -50,7 +61,7 @@
 
           <div class="row">
             <div class="col-md-12">
-              <div class="card">
+              <div class="card" style="overflow:hidden;">
                 <div class="card-content">
                   <h4 class="card-title">User Queries:</h4><br>
                   <div class="table-responsive">
@@ -155,6 +166,7 @@
 
 <script src="../../assets/vendors/dropzone/dropzone.min.js"></script>
 <script>
+
 function addResponse(id)
 {
   var rowId=id;

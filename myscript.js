@@ -14,14 +14,14 @@ $('#querymessage').keypress(function(key) {
   $('#messageError').fadeOut(500);
 });
 
-$('#querycontact').keypress(function(key) {
-  $('#contactError').fadeOut(500);
-  if(key.charCode < 48 || key.charCode > 57) return false;
-  else if($('#querycontact').val().length >= 10)
-  {
-    return false;
-  }
-});
+// $('#querycontact').keypress(function(key) {
+//   $('#contactError').fadeOut(500);
+//   if(key.charCode < 48 || key.charCode > 57) return false;
+//   else if($('#querycontact').val().length >= 10)
+//   {
+//     return false;
+//   }
+// });
 
 function loginFunction()
 {

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -25,53 +25,52 @@
 
   <link rel="stylesheet" href="../../assets/css/hierarchy-view.css">
   <link rel="stylesheet" href="../../assets/css/main.css">
-<style>
-* {
-  box-sizing: border-box;
-}
 
-li
-{
-	display:none;
-}
+  <style>
+  * {
+    box-sizing: border-box;
+  }
 
-#myInput {
-  background-image: url('../../assets/images/searchIcon.png');
-  background-position: 10px 12px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
+  li
+  {
+    display:none;
+  }
 
-#myUL {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
 
-#myUL li a {
-  border: 1px solid #ddd;
-  margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  display: block
-}
 
-#myUL li a:hover:not(.header) {
-  background-color: #eee;
-}
+  #myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #myUL li a {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block
+  }
+
+  #myUL li a:hover:not(.header) {
+    background-color: #eee;
+  }
 </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" type="text/javascript"></script>
 
 </head>
 <body onload="myAJAXFunction();">
-    <div class="wrapper">
+  
+  <div class="loader" style="z-index:300; position:fixed; height:100%; width:100%; background-color:black; opacity: 0.8; padding-top:45vh;">
+    <center>
+      <img src="../../assets/images/preloader.svg" style="position:relative; height:50px; width:50px;">
+    </center>
+  </div>
+
+  <div class="wrapper">
 
     <!--  Sidebar included     -->
     <?php include('../pageElements/sidebar.php'); ?>
@@ -83,101 +82,112 @@ li
 
       <div class="content">
 
-          <div class="container-fluid">
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" autocomplete="off">
-                <ul id="myUL">
-
-                </ul>
-              <div class="row" id="optionRow" style="display:none;">
-                  <button id="closingBtn" class="close" onclick="closingButton();"><i class="material-icons" style="color:black;font-size:20px;margin-right:20px;">cancel</i></button>
-              <div id="updateDiv" class="col-md-10">
-              <button id="ref" class="ref btn btn-primary" onclick="btnClick();">Update Payment Status of Applicant</button>
-                <div id="paymentStatus">
-                    <label>Current Payment Status</label>
-                    <select id="mySelect">
-                        <option value="1">Paid</option>
-                        <option value="0">Unpaid</option>
-                    </select>
-                    <button onclick="changeFunction();" class="btn btn-success">Change</button>
+        <div class="container-fluid">
+          <form autocomplete="off">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fas fa-search"></i>
                 </div>
+                <input class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"/>
               </div>
-              <br>
+            </div>
+          </form>
+
+          <ul id="myUL">
+          </ul>
+
+          <div class="row" id="optionRow" style="display:none;">
+            <div id="closingBtn" onclick="closingButton();"><i class="material-icons" style="color:black;font-size:20px;margin-right:20px;">cancel</i></div>
+            <div id="updateDiv" class="col-md-10">
+              <span id="currentUserId" style="display:none;"></span>
+              <button id="ref" class="ref btn btn-primary" onclick="btnClick();">Update Payment Status of Applicant</button>
+              <div id="paymentStatus">
+                <label>Current Payment Status</label>
+                <select id="mySelect">
+                  <option value="1">Paid</option>
+                  <option value="0">Unpaid</option>
+                </select>
+                <button onclick="changeFunction();" class="btn btn-success">Change</button>
+              </div>
+            </div>
+            <br>
             <div id="viewInfo" class="col-md-2" style="display:none;">
               <button class="btn btn-primary" id="viewInfoBtn" onclick="infoFunction();" style="margin-top:-10px;">View Info</button>
-              </div>
-             </div>
-            <section class="management-hierarchy" id="sec" style="position:relative; min-height:750px;display:none;">
-              <div class="hv-container">
-                  <div class="hv-wrapper">
+            </div>
+          </div>
+          <section class="management-hierarchy" id="sec" style="position:relative; min-height:750px;display:none;">
+            <div class="hv-container">
+              <div class="hv-wrapper">
 
-                      <!-- Key component -->
-                      <div class="hv-item">
+                <!-- Key component -->
+                <div class="hv-item">
 
-                          <div class="hv-item-parent" id="mainParent">
-
-                          </div>
-
-                          <div class="hv-item-children" id="mainChildren">
-
-
-                          </div>
-
-                      </div>
+                  <div class="hv-item-parent" id="mainParent">
 
                   </div>
+
+                  <div class="hv-item-children" id="mainChildren">
+
+
+                  </div>
+
+                </div>
+
               </div>
+            </div>
           </section>
 
-        <section id="infoPage" style="position:relative; min-height:750px;display:none;">
+          <section id="infoPage" style="position:relative; min-height:750px;display:none;">
             <?php
-                include('../php/secondsection.php');
+            include('../php/secondsection.php');
             ?>
-        </section>
-
-          </div>
+          </section>
 
         </div>
 
-        <?php include('../pageElements/footer.php'); ?>
+      </div>
 
-        </div>
+      <?php include('../pageElements/footer.php'); ?>
 
     </div>
 
+  </div>
 
 
-<script>
-function myFunction() {
-	if(document.getElementById("myInput").value=='')
+
+  <script>
+  function myFunction() {
+    if(document.getElementById("myInput").value=='')
     {
-    	document.getElementById("myUL").style.display="none";
+      document.getElementById("myUL").style.display="none";
     }
     else
     {
-    document.getElementById("myUL").style.display="block";
-    var input, filter, ul, li, a, i, txtValue,testValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
+      document.getElementById("myUL").style.display="block";
+      var input, filter, ul, li, a, i, txtValue,testValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName("li");
+      for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
         txtValue = a.textContent || a.innerText;
         testValue= txtValue.toUpperCase().substring(0,input.value.length);
         if ((filter).localeCompare(testValue)==0) {
-            li[i].style.display = "block";
+          li[i].style.display = "block";
         }
         else {
-            li[i].style.display = "none";
+          li[i].style.display = "none";
         }
+      }
     }
-    }
-}
+  }
 </script>
 
 </body>
 
-    <script src="../../assets/vendors/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../../assets/vendors/jquery-ui.min.js" type="text/javascript"></script>
 <script src="../../assets/vendors/bootstrap.min.js" type="text/javascript"></script>
 <script src="../../assets/vendors/material.min.js" type="text/javascript"></script>
 <script src="../../assets/vendors/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
@@ -217,7 +227,7 @@ function myFunction() {
 <script src="../../assets/vendors/dropzone/dropzone.min.js"></script>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 var currentId;
 var myObj;
 function searchParent(id){
@@ -295,175 +305,179 @@ function hideChildren(child){
 
 </script>
 
-    <script>
-        var requser="";
-         $(document).ready(function(){
-               $("#down").hide();
+<script>
+var requser="";
+$(document).ready(function(){
+  $("#down").hide();
 
-            });
-        function myAJAXFunction()
+});
+function myAJAXFunction()
+{
+
+  $.ajax({
+    type: 'POST',
+    url: 'getData.php',
+    data: { Username:$('#user').val()},
+
+    beforeSend: function() {
+
+    },
+    success: function(response) {
+      $('#myUL').html(response);
+      $('.loader').fadeOut();
+    }
+  });
+
+}
+
+function update(id)
+{
+
+  $('#viewInfoBtn').text("View Info");
+  $('#infoPage').css('display','none');
+  $('#sec').css('display','block');
+
+  $('#currentUserId').html(id);
+  searchParent(id);
+  requser=id;
+  $('#myUL').css('display','none');
+  $('#sec').css('display','block');
+  $('#ref').attr('id',id);
+  $('#optionRow').css('display','block');
+  $('#viewInfo').css('display','block');
+  $('#paymentStatus').css('display','none');
+}
+
+function btnClick()
+{
+  if($("#paymentStatus").is(":visible"))
+  {
+    $('#paymentStatus').slideUp();
+  }
+  else{
+    $('#paymentStatus').slideDown();
+    var aid=$('#currentUserId').html();
+    $.ajax({
+      type: 'POST',
+      url: 'payment.php',
+      data: { ID:aid},
+
+      beforeSend: function() {
+
+      },
+      success: function(response) {
+        if(response.match(/0/))
         {
-
-            $.ajax({
-                    type: 'POST',
-                    url: 'getData.php',
-                    data: { Username:$('#user').val()},
-
-                        beforeSend: function() {
-
-                    },
-                success: function(response) {
-                    $('#myUL').html(response);
-                }
-                });
-
+          $( "#mySelect" ).val("0");
         }
-
-        function update(id)
+        else
         {
-
-            searchParent(id);
-            requser=id;
-            $('#myUL').css('display','none');
-            $('#sec').css('display','block');
-            $('#ref').attr('id',id);
-            $('#optionRow').css('display','block');
-            $('#viewInfo').css('display','block');
-            $('#paymentStatus').css('display','none');
+          $( "#mySelect" ).val("1");
         }
+      }
+    });
+  }
+}
 
-        function btnClick()
-        {
-            if($("#paymentStatus").is(":visible"))
-                {
-                    $('#paymentStatus').slideUp();
-                }
-            else{
-                 $('#paymentStatus').slideDown();
-                 var aid=$('.ref').attr('id');
-             $.ajax({
-                    type: 'POST',
-                    url: 'payment.php',
-                    data: { ID:aid},
+function changeFunction()
+{
+  var aid=$('#currentUserId').html();
+  $.ajax({
+    type: 'POST',
+    url: 'updatePaymentStatus.php',
+    data: { Id:aid,val:$("#mySelect").val()},
 
-                        beforeSend: function() {
+    beforeSend: function() {
 
-                    },
-                success: function(response) {
-                    if(response.match(/0/))
-                        {
-                            $( "#mySelect" ).val("0");
-                        }
-                    else
-                    {
-                        $( "#mySelect" ).val("1");
-                    }
-                }
-                });
-            }
+    },
+    success: function(response) {
+      if(response.match(/success/))
+      {
+        alert("Payment Status Sucessfully changed");
+        $('#paymentStatus').css('display','block');
+        update(aid);
+      }
+      else{
+        alert('Updation Failed');
+      }
+    }
+  });
 
-        }
+}
 
-        function changeFunction()
-        {
-            var aid=$('.ref').attr('id');
-            $.ajax({
-                    type: 'POST',
-                    url: 'updatePaymentStatus.php',
-                    data: { Id:aid,val:$("#mySelect").val()},
+function closingButton()
+{
+  $('#optionRow').slideUp();
+  $('#paymentStatus').css('display','none');
+}
 
-                        beforeSend: function() {
+function infoFunction()
+{
+  var aid=$('#currentUserId').html();
+  if($('#viewInfoBtn').text()=="View Info")
+  {
+    $('#viewInfoBtn').text("Show Chart");
+    $('#sec').css('display','none');
+    $('#infoPage').css('display','block');
+    $.ajax({
+      type: 'POST',
+      url: '../php/getEmployeeInfo.php',
+      data: { Id:aid},
 
-                    },
-                success: function(response) {
-                    if(response.match(/success/))
-                        {
-                            alert("Payment Status Sucessfully changed");
-                            $('#paymentStatus').css('display','block');
-                            update(aid);
-                        }
-                    else{
-                        alert('Updation Failed');
-                    }
-                }
-                });
+      beforeSend: function() {
 
-        }
+      },
+      success: function(response) {
+        $('#name').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#email').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#gender').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#contact').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#dob').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#occupation').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#mailingAddress').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#permanentAddress').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#pin').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#district').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
+        $('#state').val(response.substring(0,response.indexOf('=')));
+        response=response.substring(response.indexOf('=')+1);
 
-        function closingButton()
-        {
-            $('#optionRow').slideUp();
-            $('#paymentStatus').css('display','none');
-        }
-
-        function infoFunction()
-        {
-            var aid=$('.ref').attr('id');
-            if($('#viewInfoBtn').text()=="View Info")
-            {
-                $('#viewInfoBtn').text("Show Chart");
-                $('#sec').css('display','none');
-                $('#infoPage').css('display','block');
-                $.ajax({
-                    type: 'POST',
-                    url: '../php/getEmployeeInfo.php',
-                    data: { Id:aid},
-
-                        beforeSend: function() {
-
-                    },
-                success: function(response) {
-                    $('#name').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#email').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#gender').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#contact').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#dob').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#occupation').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-
-                    $('#mailingAddress').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#permanentAddress').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#pin').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#district').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-                    $('#state').val(response.substring(0,response.indexOf('=')));
-                    response=response.substring(response.indexOf('=')+1);
-
-                }
-                });
-            }
-            else
-            {
-                $('#viewInfoBtn').text("View Info");
-                $('#infoPage').css('display','none');
-                $('#sec').css('display','block');
-            }
-        }
+      }
+    });
+  }
+  else
+  {
+    $('#viewInfoBtn').text("View Info");
+    $('#infoPage').css('display','none');
+    $('#sec').css('display','block');
+  }
+}
 
 
-        function advanceDetails()
-        {
-          if($('#show').text()=='Advance Details')
-          {
-            $('#show').text("Show Less");
-            $("#down").slideDown();
-          }
-          else
-          {
-            $('#show').text("Advance Details");
-            $("#down").slideUp();
-          }
+function advanceDetails()
+{
+  if($('#show').text()=='Advance Details')
+  {
+    $('#show').text("Show Less");
+    $("#down").slideDown();
+  }
+  else
+  {
+    $('#show').text("Advance Details");
+    $("#down").slideUp();
+  }
 
-        }
-    </script>
+}
+</script>
 
 <style media="screen">
 .mainHide::after{

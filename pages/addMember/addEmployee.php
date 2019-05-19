@@ -87,10 +87,10 @@
 
 </head>
 
-<body>
-  <div class="loader" style="display:none; padding-top:25%; z-index:300; position:fixed; height:100%; width:100%; background-color:black; opacity: 0.8;">
+<body onload="$('.loader').fadeOut();">
+  <div class="loader" style="z-index:300; position:fixed; height:100%; width:100%; background-color:black; opacity: 0.8; padding-top:45vh;">
     <center>
-      <img src="../../assets/images/preloader.gif" style="position:relative; height:40px; width:40px;">
+      <img src="../../assets/images/preloader.svg" style="position:relative; height:50px; width:50px;">
     </center>
   </div>
   <div class="wrapper">
@@ -145,21 +145,21 @@
                     <div class="wizard-navigation">
                       <ul class="trackPage">
                         <li>
-                          <a href="#personalInfo" data-toggle="tab">PERSONAL</a>
+                          <a href="#personalInfo" data-toggle="tab" id="personalInfoTab">PERSONAL</a>
                         </li>
                         <li>
-                          <a href="#addressDetails" data-toggle="tab">ADDRESS</a>
+                          <a href="#addressDetails" data-toggle="tab" id="addressDetailsTab">ADDRESS</a>
                         </li>
                         <li>
-                          <a href="#paymentDetails" data-toggle="tab">PAYMENT</a>
+                          <a href="#paymentDetails" data-toggle="tab" id="paymentDetailsTab">PAYMENT</a>
                         </li>
                         <li>
-                          <a href="#productDetails" data-toggle="tab">PRODUCT</a>
+                          <a href="#productDetails" data-toggle="tab" id="productDetailsTab">PRODUCT</a>
                         </li>
                         <li>
-                          <a href="#bankDetails" data-toggle="tab">BANK</a>
+                          <a href="#bankDetails" data-toggle="tab" id="bankDetailsTab">BANK</a>
                         </li><li>
-                          <a href="#confirm" data-toggle="tab">CONFIRM</a>
+                          <a href="#confirm" data-toggle="tab" id="confirmTab">CONFIRM</a>
                         </li>
                       </ul>
                     </div>
@@ -565,7 +565,7 @@
                                     <label class="control-label">Account No.
                                       <small>(required)</small>
                                     </label>
-                                    <input name="accountNo" type="text" class="form-control" id="accountNo" required maxlength="24" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                    <input name="accountNo" type="number" class="form-control" id="accountNo" required maxlength="24" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                   </div>
                                 </div>
                               </div>
@@ -609,7 +609,7 @@
                                   <table style="width:90%;">
                                     <tr>
                                       <td style="width:20%"><label>Name:</label></td>
-                                      <td style="width:50%"><input id="cname" type="text" name="cname" class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td style="width:50%"><input id="cname" type="text" name="cname" class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                       <td rowspan="3" style="width:30%">
                                         <div class="picture">
                                           <img src="../../assets/images/faces/avatar.png" class="picture-src" id="confirmwizardPicturePreview" title="" />
@@ -618,11 +618,11 @@
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Age:</label></td>
-                                      <td style="width:50%"><input id="cage" type="text" name="cage" class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td style="width:50%"><input id="cage" type="text" name="cage" class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Gender:</label></td>
-                                      <td style="width:50%"><input id="csex" type="text" name="csex" class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td style="width:50%"><input id="csex" type="text" name="csex" class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Date Of Birth:</label></td>
@@ -634,35 +634,35 @@
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Relation of Applicant:</label></td>
-                                      <td><input id="crelation" type="text" name="crelation"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="crelation" type="text" name="crelation"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Occupation of Applicant:</label></td>
-                                      <td><input id="coccupation" type="text" name="coccupation" class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="coccupation" type="text" name="coccupation" class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Mailing Address:</label></td>
-                                      <td><input id="cmailing" type="text" name="cmailing" class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cmailing" type="text" name="cmailing" class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Permanent Address:</label></td>
-                                      <td><input id="cpermanent" type="text" name="cpermanent"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cpermanent" type="text" name="cpermanent"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Post Office:</label></td>
-                                      <td><input id="cpo" type="text" name="cpo"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cpo" type="text" name="cpo"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Police Station:</label></td>
-                                      <td><input id="cps" type="text" name="cps" class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cps" type="text" name="cps" class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>District:</label></td>
-                                      <td><input id="cdistrict" type="text" name="cdistrict" value="" class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cdistrict" type="text" name="cdistrict" value="" class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>State:</label></td>
-                                      <td><input id="cstate" type="text" name="cstate"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cstate" type="text" name="cstate"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
 
                                     <tr>
@@ -683,7 +683,7 @@
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Senior Name:</label></td>
-                                      <td><input id="csenior" type="text" name="csenior"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="csenior" type="text" name="csenior"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Amount:</label></td>
@@ -699,21 +699,21 @@
                                     </tr>
                                     <tr id="rowdd">
                                       <td style="width:20%"><label>Demand Draft No.:</label></td>
-                                      <td><input id="cddno" type="text" name="cddno"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cddno" type="text" name="cddno"  class="form-control" disabled  style="margin-bottom:20px;text-transform:uppercase;"></td>
                                     </tr>
                                     <tr>
                                       <td style="width:20%"><label>Pan No.:</label></td>
-                                      <td><input id="cpan" type="text" name="cpan"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                      <td><input id="cpan" type="text" name="cpan"  class="form-control" disabled  style="margin-bottom:20px;text-transform:uppercase;"></td>
                                     </tr>
                                     <tr>
                                       <tr>
                                         <td style="width:20%"><label>Product Details:</label></td>
-                                        <td><input id="cproduct" type="text" name="cproduct"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                        <td><input id="cproduct" type="text" name="cproduct"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                       </tr>
                                       <tr>
                                         <tr>
                                           <td style="width:20%"><label>Bank Name:</label></td>
-                                          <td><input id="cbn" type="text" name="cbn"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                          <td><input id="cbn" type="text" name="cbn"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                         </tr>
                                         <tr>
                                           <tr>
@@ -722,11 +722,11 @@
                                           </tr>
                                           <tr>
                                             <td style="width:20%"><label>IFSC:</label></td>
-                                            <td><input id="cifsc" type="text" name="cifsc"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                            <td><input id="cifsc" type="text" name="cifsc"  class="form-control" disabled  style="margin-bottom:20px;text-transform:uppercase;"></td>
                                           </tr>
                                           <tr>
                                             <td style="width:20%"><label>Maintained At:</label></td>
-                                            <td><input id="cmaintained" type="text" name="cmaintained"  class="form-control" disabled  style="margin-bottom:20px;"></td>
+                                            <td><input id="cmaintained" type="text" name="cmaintained"  class="form-control" disabled  style="margin-bottom:20px;text-transform:capitalize;"></td>
                                           </tr>
                                           <tr>
                                           </table>

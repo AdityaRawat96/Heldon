@@ -55,6 +55,18 @@ if(!isset($_COOKIE["heldonid"]))
       color:yellow;
     }
     </style>
+    <style media="screen">
+
+    /* Hide HTML5 Up and Down arrows. */
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    </style>
     <script src="myscript.js"></script>
 
   </head>
@@ -174,7 +186,7 @@ if(!isset($_COOKIE["heldonid"]))
 
                 <div class="video-thumb animated faderight">
                   <!--Youtube Video Link-->
-                  <a class="videoPopup" href="https://www.youtube.com/watch?v=yaBNjTtCxd4">
+                  <a class="videoPopup" href="https://youtu.be/cZ9g_fjt5rM">
                     <span class="play-icon"><i class="fa fa-play light"></i></span>
                   </a>
                   <!--Video Thumb Image-->
@@ -654,27 +666,27 @@ if(!isset($_COOKIE["heldonid"]))
                       <!--Contact Form-->
                       <form>
                         <div class="form-group col-sm-6 animated fadeup">
-                          <input class="myInput" placeholder="Full Name" id="queryname" type="text" autocomplete="off" >
+                          <input class="myInput" placeholder="Full Name" id="queryname" type="text" autocomplete="off" style="text-transform: capitalize" maxlength="30">
                           <span class="input-icon"><i class="fa fa-user"></i></span>
                           <small id="nameError" style="color:red; display:none; font-size:16px;">Please enter valid name.</small>
                         </div>
                         <div class="form-group col-sm-6 animated fadeup" style="animation-delay: .15s">
-                          <input class="myInput" placeholder="Email Address" id="queryemail" type="text" autocomplete="off" >
+                          <input class="myInput" placeholder="Email Address" id="queryemail" type="text" autocomplete="off" maxlength="50">
                           <span class="input-icon"><i class="fas fa-envelope-open-text"></i></span>
                           <small id="emailError" style="color:red; display:none; font-size:16px;">Please enter valid email.</small>
                         </div>
                         <div class="form-group col-sm-6 animated fadeup"  style="animation-delay: .15s">
-                          <input class="myInput" placeholder="Mobile or Telephone"id="querycontact" autocomplete="off" type="text" >
+                          <input class="myInput" placeholder="Mobile or Telephone"id="querycontact" autocomplete="off" type="number" maxlength="10" oninput="javascript: if (this.which > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                           <span class="input-icon"><i class="fa fa-phone"></i></span>
                           <small id="contactError" style="color:red; display:none; font-size:16px;">Please enter valid contact.</small>
                         </div>
                         <div class="form-group col-sm-6 animated fadeup" style="animation-delay: .15s">
-                          <input class="myInput" placeholder="Subject" id="querysubject" type="text" autocomplete="off" >
+                          <input class="myInput" placeholder="Subject" id="querysubject" type="text" autocomplete="off"  maxlength="50">
                           <span class="input-icon"><i class="fa fa-puzzle-piece"></i></span>
                           <small id="subjectError" style="color:red; display:none; font-size:16px;">Please enter valid Subject.</small>
                         </div>
                         <div class="form-group col-sm-12 animated fadeup">
-                          <textarea class="myInput" id="querymessage" placeholder="Type your message here..." name="" id="" autocomplete="off" cols="30" rows="4"></textarea>
+                          <textarea class="myInput" id="querymessage" placeholder="Type your message here..." name="" id="" autocomplete="off" cols="30" rows="4" maxlength="300"></textarea>
                           <span class="input-icon"><i class="fa fa-comments"></i></span>
                           <small id="messageError" style="color:red; display:none; font-size:16px;">Please enter valid Message.</small>
                         </div>

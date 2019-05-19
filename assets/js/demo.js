@@ -355,7 +355,7 @@ var demo = {
         var $display_width = $(document).width();
 
         if($display_width < 600 && $total > 3){
-          $width = 100/$total;
+          $width = 100/($total/2);
         }
 
         navigation.find('li').css('width',$width + '%');
@@ -485,7 +485,11 @@ var demo = {
 
     function refreshAnimation($wizard, index){
       var total_steps = $wizard.find('li').length;
+      var $display_width = $(document).width();
       var move_distance = $wizard.width() / total_steps;
+      if($display_width < 600){
+        move_distance = $wizard.width() / (total_steps/2);
+      }
       var step_width = move_distance;
       move_distance *= index;
 
